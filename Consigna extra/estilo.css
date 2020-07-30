@@ -1,0 +1,60 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;   
+}
+div {
+    background-color: cornflowerblue;
+    color: white;
+    width: fit-content;
+    height: fit-content;
+    float: inherit;
+    margin: auto;
+}
+#ciudad {
+    font-size: medium;
+    color: black;
+    font-weight: bold;
+}
+#temp {
+    font-size: xx-large;
+    color:black;
+    font-weight: bolder;
+    animation: blinker 1s infinite;  
+}
+
+#imagen { align-content: center;
+      width: 35px;
+      animation: blinker 1s infinite;  
+      height: 35px;}
+      
+@keyframes blinker {
+    50% {
+    opacity: 0;
+    }
+    
+}
+#viento,#humedad{
+    float: right;
+    margin-left: 100px;
+}
+
+#humedad{
+    float: right;
+    margin-right: 22px;
+}
+
+#uno{
+    width: 400px;
+    height: 400px;
+    float: left;
+}
+
+#dos{
+    width: 450px;
+    height: 380px;
+    float: right;
+}
+
+#ub{
+    width: 35px;
+    height: 37px;
+}

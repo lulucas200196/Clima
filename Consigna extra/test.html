@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba con Fetch</title>
+    <link href="estilo.css" rel="stylesheet"> <!-- Pequeña hoja de estilos para dar formato-->
+    <script>
+        const url="http://api.openweathermap.org/data/2.5/weather?q=Montevideo&APPID=c976a9ed15095068f6af2704dd2c731a"; 
+        //dirección de la API. Puede ser la ruta a un archivo json. CREA LA TUYA.
+
+        fetch(url) //Realizamos el fetch que devolverá una promesa
+            .then( respuesta=>respuesta.json()) //Obtenemos una promesa que trataremos como json
+            .then(datos=> { //obtenemos una nueva promesa, pero los datos ya están como json.
+                document.getElementById('ciudad').innerHTML= datos.name + ", " + datos.sys.country; //escribo los datos del país
+                document.getElementById('temp').innerHTML=(datos.main.temp -273.15).toFixed(0) + " ºC";//escribo la temperatura. la convierto de kelvin a celsius
+                document.getElementById('imagen').src="http://openweathermap.org/img/wn/"+ datos.weather[0].icon +".png" //imagen
+                document.getElementById('humedad').innerHTML= "Humedad: " + datos.main.humidity + "%";
+                document.getElementById('viento').innerHTML= "Viento: a " + datos.wind.speed + " km / h.";
+                document.getElementById('sen_t').innerHTML= "Sensación térmica: " + (datos.main.feels_like -273.15).toFixed(1) + "º";
+                document.getElementById('mm').innerHTML= "Máxima y mínima: " + (datos.main.temp_min -273.15).toFixed(1) + "º" + " / " + (datos.main.temp_max-273.15).toFixed(1) + "º";
+                document.getElementById('desc').innerHTML= datos.weather[0].description;
+                document.getElementById('pres').innerHTML= "Presión atmosférica: " + datos.main.pressure + " hPa.";
+
+            })
+            .catch( error => alert("Hubo un error: " + error));
+    </script>
+</head>
+<body>
+    <h1>Datos meteorológicos en:</h1>
+    
+    <img id="uno" src="https://previews.123rf.com/images/belchonock/belchonock1602/belchonock160202706/52081836-collage-de-cuatro-estaciones-varias-fotos-de-hermosos-%C3%A1rboles-en-diferentes-%C3%A9pocas-del-a%C3%B1o-invierno-primave.jpg">
+    <img id="dos" src="https://fotografodigital.com/wp-content/uploads/2014/01/Fotografia-digital-Las-4-estaciones-fi.jpg">
+    <div>
+        
+        <img id="ub" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxAHBhUIBxAVFRMXEBYaGBcXEhcWFhEZFxEWFh0gIhYYHSggGCElIBsWITEhJSkrLi4uGCAzODMtNygtLisBCgoKDQ0NEQ0NDisZExkrKysrKysrKysrKysrKzcrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrK//AABEIAMgAyAMBIgACEQEDEQH/xAAcAAEAAgMBAQEAAAAAAAAAAAAABQgDBgcEAQL/xABAEAACAQIDBAUIBwYHAAAAAAAAAQIDBAUGESExQWEHEiJRgRMUMlJxkaHBFSNCYnKSsRYkU4KT4VRjsrPR8PH/xAAWAQEBAQAAAAAAAAAAAAAAAAAAAQL/xAAWEQEBAQAAAAAAAAAAAAAAAAAAARH/2gAMAwEAAhEDEQA/AO4gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIXMWaLPLdt5bFqyhquzFdqdT8MFtft3HJ8xdM9xct0sv0Y0Y+vUSnUfNQ9GHj1gO5akbdY7Z2ey7uqMPxVoRfxZV/Fcx3uMS1xO6rVOTm1BeyC0XwIrqrXXT4BcWp/bLDOt1fpC2/rw/wCT3WuN2l5stLqjP8NaEn8GVJPnVWuunwBi44Kn4Tma+weWuG3dWC7uu5Q/JPVfA6Dl3porUZKlmGgqkeNSkurNc3TfZfg0DHbwRGX8x2mYrbzjCK0Zpekt0oPulB7US4QAAAAAAAAAAAAAAAAAAA5h0i9KEMGnLDMB6s7haqVT0oUH3L158ty467jB0t5+eFweBYNPSvJfW1E9tGLXoxfrtceC5vZw8LjPfXtXELt3V9UlUqSe2Un1pP8Aty3GAAKAz2FjVxG48hh9KdWfqwg5S9y3G5Yd0UYtexU6lKnST/iVUn7odYDRgdMfQriKjqri21/FU/XyZDYn0XYtYRclbxqpfwqik/yvR/AI0wGS5t52td0LqEoTW+MouMo+1PaYwr0YdiFbDLxXmH1JU6kd0ovRrlzXJ7DuvR30mQx+UcMxnq07ndGW6Fw+Xqy+7x4dxwI+p9V6rv79GmEXFBzLomz88dorBsYl+8wjrCbe24iu/wC+uPetvedNCAAAAAAAAAAAAAAa3nzMkcrZdnf7HUfZpR9ao93gtrfJGyFfem3HXiWaPo2k/q7eOj27HUmlKT8F1V4MDn9xXnc3Eri4k5TlJuUm9XKTlq2zGAGg6P0e9GFTH4RxLG+tSt3tjFbKldd/3I8974abzB0SZMWY8TeIYjHW2otbGtlapvUX91bG/BcWWES6q0QSvDhGEW+DWitMMoxpQXCK015t72+bJAAIAACIzBly0zFbeQxajGezZLTScOcZrajgufuj6tlafnds3VtW9k9O3Sb3KaXwktj5FkTBc0IXVCVvcRUoSi4uLWqknsaaAqADaukbKbypjnkaOroVE5Um9ui4xb746+KaZqoaZrK6nY3ULu1k41ISUoyW+LW5losl5hhmfL1PEqWyTWk4+pUXpL5rk0VXOmdBmOuyzBPCKr7FeDcduxVKcdfjHX8qCV3oABAAAAAAAAAAAYq9VUKMq1TdGLb5JLVlRsRvJYjiFS+relUqTm/bKTfzLQ53r+bZOu6sd6tKvvdNr5lVtNFoFgEtXpH/ANYJXKdurvNNrbT3Su6Sfs8qgqymTcFWX8tUcNiu1GCc+c5dqb97fuJ0AMgAAAAAAANK6WsEWM5NqzitalFeVh39j0l4x1+BW4uBdUVcW0qE90otP2NaFQJQ6knDubXu2BY+HuwO/eFY1Rv4b6denLwU1qvdqeE+SWsWuTCrixkpR60dx+iLyzW85y5bV5b5W1KXi6USUDIAAAAAAAAAANa6SE3kS8UP8NP3cfgVee8tzjFksRwqrZS3VKM4fmg4/MqPUpyo1HSqrSUW0+UlLR/FBY+Elli6VjmS2up7oXVJv2KqtfgRoCrjA1rIGOrMWVaN7rrNRUKneqkNkvfsfsZsoZAAAAAAAAea+uFaWU7mpuhTlJ8lFN/IqG59d9d8Xr79pYjpkx1YTlGVrB/WXD8nFa7ervqP8uz+ZFdgsD493gfTNZWsr68haUvSqVIwXtk0vmFWoyhHqZTtIy/wdH/ZiTBhtaKtreNvT3RjFL2JaL9DMGQAAAAAAAAAACtnS1grwfOlWcV2K31se7WXprwkn70WTNF6WsrvMWXHWtY616Gs4LjOOnbj4parmkCK5gANNy6Ms5PKmMOF227aq0qnHqNbppctz717EWOoVo3FFVqElKMoppp6qSe5p8UU/N0yH0hXGVZK1rJ1bbXbT10lT13uDe78L2PlvCLJAgcuZussyUuthleLlptpvs1I+2D2+K1XMnggAAB4sTxClhVhO+v5qFOEetKTexL5vglxIPNOebDLUGrysp1dNlKm1Ko3zW6PtehwjOudbrNt1rdPqUYy1hRi9Yx5yf25c+HBIDDnnNE8147K/qJxppdWlD1IKXH7z3v3cDXwA0G99DWC/Suco3M12LeLqPu626C97b/kNES1ei/TeWU6Lsr/ALM5aULmOleq1Or3xbXZj/Kvi2ErcgAEAAAAAAAAAAAAAFc+lzKn7P4+7y0jpb15OUe6FTfOPL1lyb7jRS1uasCp5kwOeGXm6S7MtNXTkvRkvY/etVxKvYxhlXBsTnh1/Hq1Kcmn3Pua701o1yYWPGAAr7GThJTg9GnsaejXsfA2PDs+4rh0VG2vaui2aTaqpf1E2a2AN2fStjDWnnMP6FPX9CHxPOmJ4pFxvb2q4v7MZeTi/CnoQIAAAAASGXsHq4/i9PDLBdqctNWtkEvSk+SW34cQN26GcqfTGM/TF5H6mhJOOq2Trb0vZHe+fVLAEZgGD0sAwinhtitIQjpq98nvcnzb1bJMMgAAAAAAAAAAAAAAABzrpbyV+0GHfSmHR/eaUXsW+vTW1x/EtrXiuJ0UAU5B1TphyN5hWeYcJh9VN/XxS2UpP7a+63v7nt47OVhoAAAAAAAB9jFzl1YrV692rb7kWJ6K8lrLGFedXsf3qsk5/wCVHeoL9Xz9iNT6G8jdeUcyYtHYnrbwa3v+I1/p9/cdoCUAAQAAAAAAAAAAAAAAAAAAGGvSjcUXRrRUoyTTTWqknsaa7iufSVkieVMR8vaJu1qN9R7/ACct/Uk/0fFc0yyR4MXwyjjGHTsMQgpU5x0a/Rp8Gt6fACpANjzxlGtlHFvNq+sqUtXSqabKke590lxXjuZrgaAAAN86LsjPM195/iMX5pTlt12eXkvsr7vrPw47Ivo/ydVzdivUWsLeDXlamm5erH7z+C292tk8OsaWG2ULKygoU4RSjFLZFL/u8JWenBU4KEEkkloktElyMgAQAAAAAAAAAAAAAAAAAAAAAAABEZiwGhmLCpYdiMdYy2p/ahJbpRfBr+24rVm3LVfK2LOwv1qtrhNLSNWPrLn3rg/AtYQea8t0Mz4VKxxBc4TS7VKXCS+a4rYBVUn8l5Ur5sxVWlp2YLR1KmmsaUfnJ8F8kyUpdGuITzT9CThol2nX0fkvJ6+knxfDq79eW073lvAKGWsKjh+HR0ivSk/SqS4yk+Lf9kF1mwLB6GAYXDDsNj1YRXtlJ8W3xb4skgAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/2Q==">
+        <span id="ciudad"></span><br><br>
+        <span id="desc"></span><br><br>
+        <img id="imagen" src="">
+        <span id="temp"> </span>
+        <span id="viento"></span><br>
+        <span id="humedad"></span><br><br>
+        <span id="sen_t"></span><br><br>
+        <span id="mm"></span> <br><br>
+        <span id="pres"></span>
+    </div>
+</body>
+</html>
